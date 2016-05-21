@@ -34,17 +34,21 @@ std::string getRecipeName(std::string result)
     return name;
 }
 
+void sorry(rapp::robot::navigation &nav)
+{
+    nav.moveJoint({"HeadYaw"}, {0.5}, 1.0f);
+    nav.moveJoint({"HeadYaw"}, {-0.5}, 1.0f);
+    nav.moveJoint({"HeadYaw"}, {0}, 1.0f);
+}
+
 
 int main(int argc, char * argv[]) {
     rapp::robot::info info(argc, argv);
     rapp::robot::communication comm(argc, argv);
     rapp::robot::navigation nav(argc, argv);
 
-    nav.moveJoint({"HeadYaw"}, {0}, 0.5f);
-    nav.moveJoint({"HeadPitch"}, {0}, 0.5f);
-    nav.moveJoint({"HeadPitch"}, {1}, 0.5f);
-    nav.moveJoint({"HeadPitch"}, {-1}, 0.5f);
-    nav.moveJoint({"HeadPitch"}, {0}, 0.5f);
+    nav.moveJoint({"HeadYaw"}, {0}, 1.0f);
+    nav.moveJoint({"HeadPitch"}, {0}, 1.0f);
 
 
     comm.text_to_speech("What do you want to cook?");
@@ -76,6 +80,7 @@ int main(int argc, char * argv[]) {
                 break;
         }
 
+        sorry(nav);
         comm.text_to_speech("Sorry, I don't understand you!");
 
     } while (1);
@@ -136,8 +141,11 @@ int main(int argc, char * argv[]) {
             if (i==ingredients.size())i=0;
         }
 
-        else comm.text_to_speech("Sorry, I don't understand you.");
-
+        else
+        {
+            sorry(nav);
+            comm.text_to_speech("Sorry, I don't understand you.");
+        }
     }
 
 
@@ -161,6 +169,7 @@ int main(int argc, char * argv[]) {
             if(line=="@")break;
         }
         else {
+            sorry(nav);
             comm.text_to_speech("Sorry, I don't understand you!");
             isUnderstand=false;
         }
