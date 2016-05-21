@@ -4,6 +4,8 @@
 
 #include <rapp-robots-api/info/info.hpp>
 #include <rapp-robots-api/communication/communication.hpp>
+#include <rapp-robots-api/navigation/navigation.hpp>
+
 
 std::vector<std::string> getRecipies(){
     std::vector<std::string> recipies;
@@ -36,6 +38,14 @@ std::string getRecipeName(std::string result)
 int main(int argc, char * argv[]) {
     rapp::robot::info info(argc, argv);
     rapp::robot::communication comm(argc, argv);
+    rapp::robot::navigation nav(argc, argv);
+
+    nav.moveJoint({"HeadYaw"}, {0}, 0.5f);
+    nav.moveJoint({"HeadPitch"}, {0}, 0.5f);
+    nav.moveJoint({"HeadPitch"}, {1}, 0.5f);
+    nav.moveJoint({"HeadPitch"}, {-1}, 0.5f);
+    nav.moveJoint({"HeadPitch"}, {0}, 0.5f);
+
 
     comm.text_to_speech("What do you want to cook?");
     tellRecipies(comm);
