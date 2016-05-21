@@ -56,7 +56,6 @@ int main(int argc, char * argv[]) {
     nav.moveJoint({"HeadYaw","HeadPitch"}, {0,0}, 1.0f);
 
     highFive(nav);
-    return 0;
 
     comm.text_to_speech("What do you want to cook?");
     tellRecipies(comm);
