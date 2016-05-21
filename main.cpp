@@ -117,6 +117,7 @@ int main(int argc, char * argv[]) {
         else if(result=="yes")
         {
             ingredients.erase(ingredients.begin()+i);
+            if (i==ingredients.size())i=0;
         }
 
         else if(result=="no")
