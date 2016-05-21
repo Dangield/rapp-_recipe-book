@@ -36,9 +36,10 @@ std::string getRecipeName(std::string result)
 
 void sorry(rapp::robot::navigation &nav)
 {
-    nav.moveJoint({"HeadYaw"}, {0.5}, 1.0f);
-    nav.moveJoint({"HeadYaw"}, {-0.5}, 1.0f);
-    nav.moveJoint({"HeadYaw"}, {0}, 1.0f);
+    nav.moveJoint({"HeadYaw","HeadYaw","HeadYaw"}, {0.5,-0.5,0}, 1.0f);
+//    nav.moveJoint({"HeadYaw"}, {0.5}, 1.0f);
+//    nav.moveJoint({"HeadYaw"}, {-0.5}, 1.0f);
+//    nav.moveJoint({"HeadYaw"}, {0}, 1.0f);
 }
 
 
