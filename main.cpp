@@ -13,7 +13,7 @@ std::vector<std::string> getRecipies(){
     return recipies;
 }
 
-void tellRecipies(rapp::robot::communication comm)
+void tellRecipies(rapp::robot::communication &comm)
 {
     comm.text_to_speech("Say one for pancake.");
     comm.text_to_speech("Say two for omlette.");
