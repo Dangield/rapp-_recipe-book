@@ -44,19 +44,7 @@ void sorry(rapp::robot::navigation &nav)
 
 void highFive(rapp::robot::navigation &nav){
     nav.moveJoint({"LShoulderPitch","LShoulderRoll","LElbowYaw", "LElbowRoll", "LWristYaw", "LHand"},
-    {0,0,0,0,0,0}, 0.5);
-    nav.moveJoint({"LShoulderPitch","LShoulderRoll","LElbowYaw", "LElbowRoll", "LWristYaw", "LHand"},
-    {1,0,0,0,0,0}, 0.5);
-    nav.moveJoint({"LShoulderPitch","LShoulderRoll","LElbowYaw", "LElbowRoll", "LWristYaw", "LHand"},
-    {1,1,0,0,0,0}, 0.5);
-    nav.moveJoint({"LShoulderPitch","LShoulderRoll","LElbowYaw", "LElbowRoll", "LWristYaw", "LHand"},
-    {1,1,1,0,0,0}, 0.5);
-    nav.moveJoint({"LShoulderPitch","LShoulderRoll","LElbowYaw", "LElbowRoll", "LWristYaw", "LHand"},
-    {1,1,1,1,0,0}, 0.5);
-    nav.moveJoint({"LShoulderPitch","LShoulderRoll","LElbowYaw", "LElbowRoll", "LWristYaw", "LHand"},
-    {1,1,1,1,1,0}, 0.5);
-    nav.moveJoint({"LShoulderPitch","LShoulderRoll","LElbowYaw", "LElbowRoll", "LWristYaw", "LHand"},
-    {1,1,1,1,1,1}, 0.5);
+    {0,-1.5,3.14,1.5,-1.5,1}, 0.5);
 }
 
 
