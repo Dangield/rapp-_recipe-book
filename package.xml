@@ -1,0 +1,12 @@
+<package format="2">
+  <name>recipe-book</name>
+  <version>0.2.0</version>
+  <description>Recipe-book</description>
+  <maintainer email="olek.brzozowski@gmail.com">Aleksander Brzozowski</maintainer>
+  <maintainer email="dan.gield@gmail.com">Daniel Giełdowski</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>cmake</buildtool_depend>
+
+  <build_depend>rapp-robots-api</build_depend>
+</package>
