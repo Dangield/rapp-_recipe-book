@@ -42,6 +42,23 @@ void sorry(rapp::robot::navigation &nav)
 //    nav.moveJoint({"HeadYaw"}, {0}, 1.0f);
 }
 
+void highFive(rapp::robot::navigation &nav){
+    nav.moveJoint({"LShoulderPitch","LShoulderRoll","LElbowYaw", "LElbowRoll", "LWristYaw", "LHand"},
+    {0,0,0,0,0,0}, 0.5);
+    nav.moveJoint({"LShoulderPitch","LShoulderRoll","LElbowYaw", "LElbowRoll", "LWristYaw", "LHand"},
+    {1,0,0,0,0,0}, 0.5);
+    nav.moveJoint({"LShoulderPitch","LShoulderRoll","LElbowYaw", "LElbowRoll", "LWristYaw", "LHand"},
+    {1,1,0,0,0,0}, 0.5);
+    nav.moveJoint({"LShoulderPitch","LShoulderRoll","LElbowYaw", "LElbowRoll", "LWristYaw", "LHand"},
+    {1,1,1,0,0,0}, 0.5);
+    nav.moveJoint({"LShoulderPitch","LShoulderRoll","LElbowYaw", "LElbowRoll", "LWristYaw", "LHand"},
+    {1,1,1,1,0,0}, 0.5);
+    nav.moveJoint({"LShoulderPitch","LShoulderRoll","LElbowYaw", "LElbowRoll", "LWristYaw", "LHand"},
+    {1,1,1,1,1,0}, 0.5);
+    nav.moveJoint({"LShoulderPitch","LShoulderRoll","LElbowYaw", "LElbowRoll", "LWristYaw", "LHand"},
+    {1,1,1,1,1,1}, 0.5);
+}
+
 
 int main(int argc, char * argv[]) {
     rapp::robot::info info(argc, argv);
@@ -51,6 +68,7 @@ int main(int argc, char * argv[]) {
     nav.moveJoint({"HeadYaw"}, {0}, 1.0f);
     nav.moveJoint({"HeadPitch"}, {0}, 1.0f);
 
+    highFive(nav);
 
     comm.text_to_speech("What do you want to cook?");
     tellRecipies(comm);
