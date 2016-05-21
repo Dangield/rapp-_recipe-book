@@ -36,10 +36,9 @@ std::string getRecipeName(std::string result)
 
 void sorry(rapp::robot::navigation &nav)
 {
-    nav.moveJoint({"HeadYaw","HeadYaw","HeadYaw"}, {0.5,-0.5,0}, 1.0f);
-//    nav.moveJoint({"HeadYaw"}, {0.5}, 1.0f);
-//    nav.moveJoint({"HeadYaw"}, {-0.5}, 1.0f);
-//    nav.moveJoint({"HeadYaw"}, {0}, 1.0f);
+    nav.moveJoint({"HeadYaw"}, {0.5}, 1.0f);
+    nav.moveJoint({"HeadYaw"}, {-0.5}, 1.0f);
+    nav.moveJoint({"HeadYaw"}, {0}, 1.0f);
 }
 
 void highFive(rapp::robot::navigation &nav){
@@ -55,7 +54,7 @@ int main(int argc, char * argv[]) {
 
     nav.moveJoint({"HeadYaw","HeadPitch"}, {0,0}, 1.0f);
 
-    highFive(nav);
+    nav.rest("SitRelax");
 
     comm.text_to_speech("What do you want to cook?");
     tellRecipies(comm);
@@ -185,6 +184,8 @@ int main(int argc, char * argv[]) {
 
 
     comm.text_to_speech("We cooked a dish!");
+    highFive(nav);
+    comm.text_to_speech("High five!");
     comm.play_audio(info.get_path("share/talk_to_me/cheer.wav"));
     return 0;
 }
