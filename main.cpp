@@ -9,9 +9,6 @@ std::vector<std::string> getRecipies(){
     std::vector<std::string> recipies;
     recipies.push_back("one");
     recipies.push_back("two");
-    recipies.push_back("three");
-    recipies.push_back("four");
-    recipies.push_back("five");
 
     return recipies;
 }
@@ -19,6 +16,8 @@ std::vector<std::string> getRecipies(){
 void tellRecipies(rapp::robot::communication comm)
 {
     comm.text_to_speech("Say one for pancake.");
+    comm.text_to_speech("Say two for omlette.");
+    return;
 }
 
 std::string getRecipeName(std::string result)
@@ -28,17 +27,7 @@ std::string getRecipeName(std::string result)
     if(result == "one")
         name = "share/recipe-book/pancake.txt";
     else if(result == "two")
-        name = "share/recipe-book/pancake.txt";
-    else if(result == "three")
-        name = "share/recipe-book/pancake.txt";
-    else if(result == "four")
-        name = "share/recipe-book/pancake.txt";
-    else if(result == "five")
-        name = "share/recipe-book/pancake.txt";
-    else if(result == "six")
-        name = "share/recipe-book/pancake.txt";
-    else if(result == "seven")
-        name = "share/recipe-book/pancake.txt";
+        name = "share/recipe-book/omlette.txt";
 
     return name;
 }
@@ -81,7 +70,6 @@ int main(int argc, char * argv[]) {
 
     } while (1);
 
-    comm.text_to_speech(result);
     result = getRecipeName(result);
 
     std::ifstream recipeFile;
@@ -104,41 +92,42 @@ int main(int argc, char * argv[]) {
         }
     }
 
-    words = ingredients;
+    words.clear();
+    words.push_back("yes");
+    words.push_back("no");
     words.push_back("all");
     words.push_back("help");
 
-    comm.text_to_speech("Tell me what do you have?");
-    do{
+    int i=0;
+    while(ingredients.size()!=0){
+
+        comm.text_to_speech("Do we have "+ingredients[i]+"?");
         result = comm.word_spotting(words);
 
-        if(result == "all"){
-            break;
+        if(result=="all")break;
+
+        else if(result=="help")
+        {
+            comm.text_to_speech("We need the following ingredients.");
+            for(int j=0;j<ingredients.size();j++)
+                comm.text_to_speech(ingredients[j]);
+            continue;
         }
 
-        else if (result=="help"){
-            comm.text_to_speech("We need.");
-            for(int i = 0 ; i < words.size()-2 ; i++){
-                comm.text_to_speech(words[i]);
-            }
+        else if(result=="yes")
+        {
+            ingredients.erase(ingredients.begin()+i);
         }
 
-        else{
-            bool isUnderstand=false;
-            for(int i = 0 ; i < words.size()-2 ; i++){
-                if(words[i] == result){
-                    words.erase(words.begin() + i);
-                    break;
-                    isUnderstand=true;
-                }
-            }
-            if(!isUnderstand)comm.text_to_speech("Sorry, I don't understand you!");
+        else if(result=="no")
+        {
+            i++;
+            if (i==ingredients.size())i=0;
         }
 
-        if(words.size() == 2)
-            break;
+        else comm.text_to_speech("Sorry, I don't understand you.");
 
-    }while(1);
+    }
 
 
     comm.text_to_speech("We have all of the ingredients.");
@@ -148,16 +137,22 @@ int main(int argc, char * argv[]) {
     words.push_back("repeat");
     std::getline(recipeFile, line);
 
+    bool isUnderstand=true;
     do{
 
-        comm.text_to_speech(line);
+        if(isUnderstand)comm.text_to_speech(line);
         result = comm.word_spotting(words);
-        if(result=="repeat")continue;
+        isUnderstand=true;
+        if(result=="repeat")
+            continue;
         else if(result=="done"){
             std::getline(recipeFile, line);
             if(line=="@")break;
         }
-        else comm.text_to_speech("Sorry, I don't understand you!");
+        else {
+            comm.text_to_speech("Sorry, I don't understand you!");
+            isUnderstand=false;
+        }
 
 
     }while(1);

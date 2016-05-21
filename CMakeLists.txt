@@ -12,5 +12,5 @@ setup_rapp()
 create_rapp(
     NAME ${PROJECT_NAME}
     SRCS main.cpp 
-    FILES cheer.wav pancake.txt
+    FILES cheer.wav pancake.txt omlette.txt
 )
