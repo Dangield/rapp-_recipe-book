@@ -53,10 +53,10 @@ int main(int argc, char * argv[]) {
     rapp::robot::communication comm(argc, argv);
     rapp::robot::navigation nav(argc, argv);
 
-    nav.moveJoint({"HeadYaw"}, {0}, 1.0f);
-    nav.moveJoint({"HeadPitch"}, {0}, 1.0f);
+    nav.moveJoint({"HeadYaw","HeadPitch"}, {0,0}, 1.0f);
 
     highFive(nav);
+    return 0;
 
     comm.text_to_speech("What do you want to cook?");
     tellRecipies(comm);
