@@ -186,6 +186,5 @@ int main(int argc, char * argv[]) {
     comm.text_to_speech("We cooked a dish!");
     highFive(nav);
     comm.text_to_speech("High five!");
-    comm.play_audio(info.get_path("share/talk_to_me/cheer.wav"));
     return 0;
 }
